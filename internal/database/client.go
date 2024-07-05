@@ -38,4 +38,21 @@ func NewDatabaseClient() (DatabaseClient, error) {
 	if err != nil {
 		return nil, err
 	}
+	client := Client{
+		DB: db,
+	}
+	return client, nil
+}
+
+func (c Client) Ready() bool {
+	var ready string
+	tx := c.DB.Raw("SELECT 1 AS ready").Scan(&ready)
+	if tx.Error != nil {
+		return false
+	}
+
+	if ready == "1" {
+		return true
+	}
+	return false
 }
