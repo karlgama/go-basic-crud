@@ -16,6 +16,7 @@ type DatabaseClient interface {
 	GetAllCustomers(ctx context.Context, email string) ([]models.Customer, error)
 	GetAllServices(ctx context.Context) ([]models.Service, error)
 	GetAllVendors(ctx context.Context) ([]models.Vendor, error)
+	GetAllProducts(ctx context.Context) ([]models.Product, error)
 }
 
 type Client struct {
